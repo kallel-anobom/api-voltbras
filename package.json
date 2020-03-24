@@ -1,0 +1,15 @@
+{
+  "name": "api-voltbras",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kallel",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0",
+    "prisma-client-lib": "^1.34.10"
+  },
+  "devDependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}

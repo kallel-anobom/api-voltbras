@@ -1,0 +1,10 @@
+type Planet {
+  id: ID! @id
+  namePlanet: String!
+  mass: [Mass!]!
+}
+
+type Mass @embedded {
+  value: Int
+  unit: String
+}
