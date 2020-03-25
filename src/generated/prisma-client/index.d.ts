@@ -123,9 +123,9 @@ export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export interface SuitablePlanetsCreateInput {
   id?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  mass?: Maybe<Int>;
-  hasStation?: Maybe<Boolean>;
+  name: String;
+  mass: Int;
+  hasStation: Boolean;
 }
 
 export interface SuitablePlanetsWhereInput {
@@ -236,9 +236,9 @@ export interface BatchPayloadSubscription
 
 export interface SuitablePlanetsPreviousValues {
   id: ID_Output;
-  name?: String;
-  mass?: Int;
-  hasStation?: Boolean;
+  name: String;
+  mass: Int;
+  hasStation: Boolean;
 }
 
 export interface SuitablePlanetsPreviousValuesPromise
@@ -305,9 +305,9 @@ export interface SuitablePlanetsSubscriptionPayloadSubscription
 
 export interface SuitablePlanets {
   id: ID_Output;
-  name?: String;
-  mass?: Int;
-  hasStation?: Boolean;
+  name: String;
+  mass: Int;
+  hasStation: Boolean;
 }
 
 export interface SuitablePlanetsPromise

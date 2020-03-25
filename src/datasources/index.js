@@ -11,16 +11,17 @@ async function getPlanets() {
     const result = json.results;
     
     const planets = result.map(result => {
+      const namePlanet = result.name
      
-    if ( !result.hasOwnProperty('mass') || result.mass === null ) return;
+      if ( !result.hasOwnProperty('mass') || result.mass === null ) return;
 
-    const { name, value, unit } = result.mass;
+      const { value, unit } = result.mass;
 
       if ( unit === 'M_jup' && value > 25 ) {
         const hasStation = true;
 
         return suitablePlanets = {
-          name,
+          name: namePlanet,
           mass: value,
           hasStation
         }

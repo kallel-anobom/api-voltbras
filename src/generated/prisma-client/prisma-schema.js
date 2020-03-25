@@ -52,9 +52,9 @@ type Subscription {
 
 type SuitablePlanets {
   id: ID!
-  name: String
-  mass: Int
-  hasStation: Boolean
+  name: String!
+  mass: Int!
+  hasStation: Boolean!
 }
 
 type SuitablePlanetsConnection {
@@ -65,9 +65,9 @@ type SuitablePlanetsConnection {
 
 input SuitablePlanetsCreateInput {
   id: ID
-  name: String
-  mass: Int
-  hasStation: Boolean
+  name: String!
+  mass: Int!
+  hasStation: Boolean!
 }
 
 type SuitablePlanetsEdge {
@@ -88,9 +88,9 @@ enum SuitablePlanetsOrderByInput {
 
 type SuitablePlanetsPreviousValues {
   id: ID!
-  name: String
-  mass: Int
-  hasStation: Boolean
+  name: String!
+  mass: Int!
+  hasStation: Boolean!
 }
 
 type SuitablePlanetsSubscriptionPayload {

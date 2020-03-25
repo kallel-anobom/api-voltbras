@@ -12,26 +12,29 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', async function() {
   try {
     const result = await Planets;
-    
+
     console.log("Connection Successful!");
+    
+    const PlanetStation = mongoose.model('Planet', PlanetSchema, 'SuitablePlanets');
 
-    const PlanetStation = mongoose.model('Planet', PlanetSchema, 'Planets');
+    result.map((data) => {
+      const roundedInteger = Math.round(data.mass);
 
-    result.map(data => {
-      const { name, mass, hasStation } = data;
+      const { name,  hasStation } = data;
 
       const newPlanetStation = new PlanetStation({
         name,
-        mass,
+        mass: roundedInteger,
         hasStation
       });
 
       PlanetStation.collection.insert(newPlanetStation, function(err, docs) {
         if ( err ) return console.error(err);
         console.log('Docs', docs);
+        return 
       });
     });
-
+  
   } catch (error) {
     console.error(error);  
   }

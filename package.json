@@ -5,8 +5,9 @@
   "author": "Kallel",
   "license": "MIT",
   "scripts": {
-    "server": "node src/server.js",
-    "fetch": "node src/datasources/index.js"
+    "server": "nodemon src/server.js",
+    "fetch": "nodemon src/datasources/index.js",
+    "save": "nodemon src/save-db.js"
   },
   "dependencies": {
     "apollo-datasource-rest": "^0.8.0",

@@ -1,6 +1,6 @@
 type SuitablePlanets {
   id: ID! @id 
-  name: String
-  mass: Int
-  hasStation: Boolean
+  name: String!
+  mass: Int!
+  hasStation: Boolean!
 }

@@ -6,9 +6,10 @@ const path = require('path');
 
 const typeDefs = importSchema(path.join(__dirname, 'schema.graphql'));
 
+console.log(prisma)
 const resolvers = {
   Query: {
-    suitablePlanets: async () => await prisma.suitablePlanets
+    suitablePlanets: async () => await prisma.suitablePlanetses
   },
   Mutation: {
     createInstallStation: async(args) => {
@@ -17,6 +18,7 @@ const resolvers = {
     }
   }
 };
+
 
 const server = new ApolloServer({
   typeDefs,
