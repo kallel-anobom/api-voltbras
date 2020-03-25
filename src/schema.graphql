@@ -1,0 +1,13 @@
+type Query {
+  suitablePlanets: [SuitablePlanets!]
+}
+
+type Mutation {
+  createInstallStation(name: String! mass: Int! hasStation: Boolean!): SuitablePlanets
+}
+
+type SuitablePlanets {
+  name: String!
+  mass: Int!
+  hasStation: Boolean!
+}

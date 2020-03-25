@@ -1,10 +1,6 @@
-type Planet {
-  id: ID! @id
-  namePlanet: String!
-  mass: [Mass!]!
-}
-
-type Mass @embedded {
-  value: Int
-  unit: String
+type SuitablePlanets {
+  id: ID! @id 
+  name: String
+  mass: Int
+  hasStation: Boolean
 }

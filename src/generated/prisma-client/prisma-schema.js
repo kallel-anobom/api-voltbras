@@ -3,11 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateMass {
-  count: Int!
-}
-
-type AggregatePlanet {
+/* GraphQL */ `type AggregateSuitablePlanets {
   count: Int!
 }
 
@@ -17,148 +13,13 @@ type BatchPayload {
 
 scalar Long
 
-type Mass {
-  value: Int
-  unit: String
-}
-
-type MassConnection {
-  pageInfo: PageInfo!
-  edges: [MassEdge]!
-  aggregate: AggregateMass!
-}
-
-input MassCreateInput {
-  value: Int
-  unit: String
-}
-
-input MassCreateManyInput {
-  create: [MassCreateInput!]
-}
-
-type MassEdge {
-  node: Mass!
-  cursor: String!
-}
-
-enum MassOrderByInput {
-  value_ASC
-  value_DESC
-  unit_ASC
-  unit_DESC
-}
-
-type MassPreviousValues {
-  value: Int
-  unit: String
-}
-
-input MassScalarWhereInput {
-  value: Int
-  value_not: Int
-  value_in: [Int!]
-  value_not_in: [Int!]
-  value_lt: Int
-  value_lte: Int
-  value_gt: Int
-  value_gte: Int
-  unit: String
-  unit_not: String
-  unit_in: [String!]
-  unit_not_in: [String!]
-  unit_lt: String
-  unit_lte: String
-  unit_gt: String
-  unit_gte: String
-  unit_contains: String
-  unit_not_contains: String
-  unit_starts_with: String
-  unit_not_starts_with: String
-  unit_ends_with: String
-  unit_not_ends_with: String
-  AND: [MassScalarWhereInput!]
-  OR: [MassScalarWhereInput!]
-  NOT: [MassScalarWhereInput!]
-}
-
-type MassSubscriptionPayload {
-  mutation: MutationType!
-  node: Mass
-  updatedFields: [String!]
-  previousValues: MassPreviousValues
-}
-
-input MassSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: MassWhereInput
-  AND: [MassSubscriptionWhereInput!]
-  OR: [MassSubscriptionWhereInput!]
-  NOT: [MassSubscriptionWhereInput!]
-}
-
-input MassUpdateManyDataInput {
-  value: Int
-  unit: String
-}
-
-input MassUpdateManyInput {
-  create: [MassCreateInput!]
-  deleteMany: [MassScalarWhereInput!]
-  updateMany: [MassUpdateManyWithWhereNestedInput!]
-}
-
-input MassUpdateManyMutationInput {
-  value: Int
-  unit: String
-}
-
-input MassUpdateManyWithWhereNestedInput {
-  where: MassScalarWhereInput!
-  data: MassUpdateManyDataInput!
-}
-
-input MassWhereInput {
-  value: Int
-  value_not: Int
-  value_in: [Int!]
-  value_not_in: [Int!]
-  value_lt: Int
-  value_lte: Int
-  value_gt: Int
-  value_gte: Int
-  unit: String
-  unit_not: String
-  unit_in: [String!]
-  unit_not_in: [String!]
-  unit_lt: String
-  unit_lte: String
-  unit_gt: String
-  unit_gte: String
-  unit_contains: String
-  unit_not_contains: String
-  unit_starts_with: String
-  unit_not_starts_with: String
-  unit_ends_with: String
-  unit_not_ends_with: String
-  AND: [MassWhereInput!]
-  OR: [MassWhereInput!]
-  NOT: [MassWhereInput!]
-}
-
 type Mutation {
-  createMass(data: MassCreateInput!): Mass!
-  updateManyMasses(data: MassUpdateManyMutationInput!, where: MassWhereInput): BatchPayload!
-  deleteManyMasses(where: MassWhereInput): BatchPayload!
-  createPlanet(data: PlanetCreateInput!): Planet!
-  updatePlanet(data: PlanetUpdateInput!, where: PlanetWhereUniqueInput!): Planet
-  updateManyPlanets(data: PlanetUpdateManyMutationInput!, where: PlanetWhereInput): BatchPayload!
-  upsertPlanet(where: PlanetWhereUniqueInput!, create: PlanetCreateInput!, update: PlanetUpdateInput!): Planet!
-  deletePlanet(where: PlanetWhereUniqueInput!): Planet
-  deleteManyPlanets(where: PlanetWhereInput): BatchPayload!
+  createSuitablePlanets(data: SuitablePlanetsCreateInput!): SuitablePlanets!
+  updateSuitablePlanets(data: SuitablePlanetsUpdateInput!, where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
+  updateManySuitablePlanetses(data: SuitablePlanetsUpdateManyMutationInput!, where: SuitablePlanetsWhereInput): BatchPayload!
+  upsertSuitablePlanets(where: SuitablePlanetsWhereUniqueInput!, create: SuitablePlanetsCreateInput!, update: SuitablePlanetsUpdateInput!): SuitablePlanets!
+  deleteSuitablePlanets(where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
+  deleteManySuitablePlanetses(where: SuitablePlanetsWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -178,69 +39,89 @@ type PageInfo {
   endCursor: String
 }
 
-type Planet {
+type Query {
+  suitablePlanets(where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
+  suitablePlanetses(where: SuitablePlanetsWhereInput, orderBy: SuitablePlanetsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SuitablePlanets]!
+  suitablePlanetsesConnection(where: SuitablePlanetsWhereInput, orderBy: SuitablePlanetsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SuitablePlanetsConnection!
+  node(id: ID!): Node
+}
+
+type Subscription {
+  suitablePlanets(where: SuitablePlanetsSubscriptionWhereInput): SuitablePlanetsSubscriptionPayload
+}
+
+type SuitablePlanets {
   id: ID!
-  namePlanet: String!
-  mass(where: MassWhereInput, orderBy: MassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mass!]
+  name: String
+  mass: Int
+  hasStation: Boolean
 }
 
-type PlanetConnection {
+type SuitablePlanetsConnection {
   pageInfo: PageInfo!
-  edges: [PlanetEdge]!
-  aggregate: AggregatePlanet!
+  edges: [SuitablePlanetsEdge]!
+  aggregate: AggregateSuitablePlanets!
 }
 
-input PlanetCreateInput {
+input SuitablePlanetsCreateInput {
   id: ID
-  namePlanet: String!
-  mass: MassCreateManyInput
+  name: String
+  mass: Int
+  hasStation: Boolean
 }
 
-type PlanetEdge {
-  node: Planet!
+type SuitablePlanetsEdge {
+  node: SuitablePlanets!
   cursor: String!
 }
 
-enum PlanetOrderByInput {
+enum SuitablePlanetsOrderByInput {
   id_ASC
   id_DESC
-  namePlanet_ASC
-  namePlanet_DESC
+  name_ASC
+  name_DESC
+  mass_ASC
+  mass_DESC
+  hasStation_ASC
+  hasStation_DESC
 }
 
-type PlanetPreviousValues {
+type SuitablePlanetsPreviousValues {
   id: ID!
-  namePlanet: String!
+  name: String
+  mass: Int
+  hasStation: Boolean
 }
 
-type PlanetSubscriptionPayload {
+type SuitablePlanetsSubscriptionPayload {
   mutation: MutationType!
-  node: Planet
+  node: SuitablePlanets
   updatedFields: [String!]
-  previousValues: PlanetPreviousValues
+  previousValues: SuitablePlanetsPreviousValues
 }
 
-input PlanetSubscriptionWhereInput {
+input SuitablePlanetsSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: PlanetWhereInput
-  AND: [PlanetSubscriptionWhereInput!]
-  OR: [PlanetSubscriptionWhereInput!]
-  NOT: [PlanetSubscriptionWhereInput!]
+  node: SuitablePlanetsWhereInput
+  AND: [SuitablePlanetsSubscriptionWhereInput!]
 }
 
-input PlanetUpdateInput {
-  namePlanet: String
-  mass: MassUpdateManyInput
+input SuitablePlanetsUpdateInput {
+  name: String
+  mass: Int
+  hasStation: Boolean
 }
 
-input PlanetUpdateManyMutationInput {
-  namePlanet: String
+input SuitablePlanetsUpdateManyMutationInput {
+  name: String
+  mass: Int
+  hasStation: Boolean
 }
 
-input PlanetWhereInput {
+input SuitablePlanetsWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -255,44 +136,35 @@ input PlanetWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  namePlanet: String
-  namePlanet_not: String
-  namePlanet_in: [String!]
-  namePlanet_not_in: [String!]
-  namePlanet_lt: String
-  namePlanet_lte: String
-  namePlanet_gt: String
-  namePlanet_gte: String
-  namePlanet_contains: String
-  namePlanet_not_contains: String
-  namePlanet_starts_with: String
-  namePlanet_not_starts_with: String
-  namePlanet_ends_with: String
-  namePlanet_not_ends_with: String
-  mass_every: MassWhereInput
-  mass_some: MassWhereInput
-  mass_none: MassWhereInput
-  AND: [PlanetWhereInput!]
-  OR: [PlanetWhereInput!]
-  NOT: [PlanetWhereInput!]
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  mass: Int
+  mass_not: Int
+  mass_in: [Int!]
+  mass_not_in: [Int!]
+  mass_lt: Int
+  mass_lte: Int
+  mass_gt: Int
+  mass_gte: Int
+  hasStation: Boolean
+  hasStation_not: Boolean
+  AND: [SuitablePlanetsWhereInput!]
 }
 
-input PlanetWhereUniqueInput {
+input SuitablePlanetsWhereUniqueInput {
   id: ID
-}
-
-type Query {
-  masses(where: MassWhereInput, orderBy: MassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mass]!
-  massesConnection(where: MassWhereInput, orderBy: MassOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MassConnection!
-  planet(where: PlanetWhereUniqueInput!): Planet
-  planets(where: PlanetWhereInput, orderBy: PlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Planet]!
-  planetsConnection(where: PlanetWhereInput, orderBy: PlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlanetConnection!
-  node(id: ID!): Node
-}
-
-type Subscription {
-  mass(where: MassSubscriptionWhereInput): MassSubscriptionPayload
-  planet(where: PlanetSubscriptionWhereInput): PlanetSubscriptionPayload
 }
 `
       }

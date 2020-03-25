@@ -4,12 +4,19 @@
   "main": "index.js",
   "author": "Kallel",
   "license": "MIT",
+  "scripts": {
+    "server": "node src/server.js",
+    "fetch": "node src/datasources/index.js"
+  },
   "dependencies": {
+    "apollo-datasource-rest": "^0.8.0",
     "apollo-server": "^2.11.0",
     "graphql": "^14.6.0",
+    "mongoose": "^5.9.6",
     "prisma-client-lib": "^1.34.10"
   },
   "devDependencies": {
+    "graphql-import": "^1.0.1",
     "node-fetch": "^2.6.0"
   }
 }

@@ -5,11 +5,7 @@ var typeDefs = require("./prisma-schema").typeDefs;
 
 var models = [
   {
-    name: "Planet",
-    embedded: false
-  },
-  {
-    name: "Mass",
+    name: "SuitablePlanets",
     embedded: false
   }
 ];
