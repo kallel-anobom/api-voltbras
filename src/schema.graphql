@@ -1,31 +1,33 @@
-type Query {
-  suitablePlanets: SuitablePlanets
-  planet(id: ID!): SuitablePlanets
-}
+# # import * from "../generated/prisma-schema"
 
-type Mutation {
-  createInstallStation(name: String! mass: Int! hasStation: Boolean!): SuitablePlanets
-}
+# type Query {
+#   suitablePlanets: [SuitablePlanets]!
+#   planet(id: ID!): SuitablePlanets
+# }
 
-input SuitablePlanetsWhereUniqueInput {
-  id: ID
-}
+# type Mutation {
+#   createInstallStation(name: String! mass: Int! hasStation: Boolean!): SuitablePlanets
+# }
 
-input SuitablePlanetsUpdateInput {
-  name: String
-  mass: Int
-  hasStation: Boolean
-}
+# input SuitablePlanetsWhereUniqueInput {
+#   id: ID
+# }
 
-type SuitablePlanetsEdge {
-  node: SuitablePlanets!
-  cursor: String!
-}
+# input SuitablePlanetsUpdateInput {
+#   name: String
+#   mass: Int
+#   hasStation: Boolean
+# }
+
+# type SuitablePlanetsEdge {
+#   node: SuitablePlanets!
+#   cursor: String!
+# }
 
 
-type SuitablePlanets {
-  id: ID,
-  name: String,
-  mass: Int,
-  hasStation: Boolean,
-}
+# type SuitablePlanets {
+#   id: ID,
+#   name: String,
+#   mass: Int,
+#   hasStation: Boolean,
+# }
