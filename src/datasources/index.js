@@ -1,18 +1,27 @@
-const { prisma } = require('../generated/prisma-client');
-
 const fetch = require('node-fetch');
 
-const URI = 'https://api.arcsecond.io/exoplanets';
+const per_page = 1000;
+const URI = `https://api.arcsecond.io/exoplanets/?page_size=${per_page}`;
 
 async function getPlanets() {
   try {
-    const response = await fetch(URI);
-    const json = await response.json(); 
-    const result = json.results;
+    const exoPlanets = [];
     
-    const planets = result.map(result => {
+    let response = await fetch(URI);
+    let json = await response.json(); 
+    
+    exoPlanets.push(...json.results);
+    while ( json.next ) {
+      response = await fetch(json.next);
+      json = await response.json(); 
+      
+
+      exoPlanets.push(...json.results);
+    }
+
+    const planets = exoPlanets.map(result => {
       const namePlanet = result.name
-     
+
       if ( !result.hasOwnProperty('mass') || result.mass === null ) return;
 
       const { value, unit } = result.mass;
@@ -35,7 +44,7 @@ async function getPlanets() {
     return filteredPlanets;
   
   } catch (error) {
-    console.dir({error});
+    console.error({error});
   }
 }
 

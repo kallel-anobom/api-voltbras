@@ -7,7 +7,7 @@
   "scripts": {
     "server": "nodemon src/server.js",
     "fetch": "nodemon src/datasources/index.js",
-    "save": "nodemon src/save-db.js"
+    "save": "nodemon src/datasources/save-db.js"
   },
   "dependencies": {
     "apollo-datasource-rest": "^0.8.0",
