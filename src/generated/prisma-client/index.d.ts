@@ -16,7 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  suitablePlanets: (where?: SuitablePlanetsWhereInput) => Promise<boolean>;
+  suitablePlanet: (where?: SuitablePlanetWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -38,54 +38,54 @@ export interface Prisma {
    * Queries
    */
 
-  suitablePlanets: (
-    where: SuitablePlanetsWhereUniqueInput
-  ) => SuitablePlanetsNullablePromise;
-  suitablePlanetses: (args?: {
-    where?: SuitablePlanetsWhereInput;
-    orderBy?: SuitablePlanetsOrderByInput;
+  suitablePlanet: (
+    where: SuitablePlanetWhereUniqueInput
+  ) => SuitablePlanetNullablePromise;
+  suitablePlanets: (args?: {
+    where?: SuitablePlanetWhereInput;
+    orderBy?: SuitablePlanetOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<SuitablePlanets>;
-  suitablePlanetsesConnection: (args?: {
-    where?: SuitablePlanetsWhereInput;
-    orderBy?: SuitablePlanetsOrderByInput;
+  }) => FragmentableArray<SuitablePlanet>;
+  suitablePlanetsConnection: (args?: {
+    where?: SuitablePlanetWhereInput;
+    orderBy?: SuitablePlanetOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => SuitablePlanetsConnectionPromise;
+  }) => SuitablePlanetConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
-  createSuitablePlanets: (
-    data: SuitablePlanetsCreateInput
-  ) => SuitablePlanetsPromise;
-  updateSuitablePlanets: (args: {
-    data: SuitablePlanetsUpdateInput;
-    where: SuitablePlanetsWhereUniqueInput;
-  }) => SuitablePlanetsPromise;
-  updateManySuitablePlanetses: (args: {
-    data: SuitablePlanetsUpdateManyMutationInput;
-    where?: SuitablePlanetsWhereInput;
+  createSuitablePlanet: (
+    data: SuitablePlanetCreateInput
+  ) => SuitablePlanetPromise;
+  updateSuitablePlanet: (args: {
+    data: SuitablePlanetUpdateInput;
+    where: SuitablePlanetWhereUniqueInput;
+  }) => SuitablePlanetPromise;
+  updateManySuitablePlanets: (args: {
+    data: SuitablePlanetUpdateManyMutationInput;
+    where?: SuitablePlanetWhereInput;
   }) => BatchPayloadPromise;
-  upsertSuitablePlanets: (args: {
-    where: SuitablePlanetsWhereUniqueInput;
-    create: SuitablePlanetsCreateInput;
-    update: SuitablePlanetsUpdateInput;
-  }) => SuitablePlanetsPromise;
-  deleteSuitablePlanets: (
-    where: SuitablePlanetsWhereUniqueInput
-  ) => SuitablePlanetsPromise;
-  deleteManySuitablePlanetses: (
-    where?: SuitablePlanetsWhereInput
+  upsertSuitablePlanet: (args: {
+    where: SuitablePlanetWhereUniqueInput;
+    create: SuitablePlanetCreateInput;
+    update: SuitablePlanetUpdateInput;
+  }) => SuitablePlanetPromise;
+  deleteSuitablePlanet: (
+    where: SuitablePlanetWhereUniqueInput
+  ) => SuitablePlanetPromise;
+  deleteManySuitablePlanets: (
+    where?: SuitablePlanetWhereInput
   ) => BatchPayloadPromise;
 
   /**
@@ -96,9 +96,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  suitablePlanets: (
-    where?: SuitablePlanetsSubscriptionWhereInput
-  ) => SuitablePlanetsSubscriptionPayloadSubscription;
+  suitablePlanet: (
+    where?: SuitablePlanetSubscriptionWhereInput
+  ) => SuitablePlanetSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -109,7 +109,7 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type SuitablePlanetsOrderByInput =
+export type SuitablePlanetOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
@@ -121,14 +121,11 @@ export type SuitablePlanetsOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface SuitablePlanetsCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  mass: Int;
-  hasStation: Boolean;
-}
+export type SuitablePlanetWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
-export interface SuitablePlanetsWhereInput {
+export interface SuitablePlanetWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -157,205 +154,107 @@ export interface SuitablePlanetsWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  mass?: Maybe<Int>;
-  mass_not?: Maybe<Int>;
-  mass_in?: Maybe<Int[] | Int>;
-  mass_not_in?: Maybe<Int[] | Int>;
-  mass_lt?: Maybe<Int>;
-  mass_lte?: Maybe<Int>;
-  mass_gt?: Maybe<Int>;
-  mass_gte?: Maybe<Int>;
+  mass?: Maybe<Float>;
+  mass_not?: Maybe<Float>;
+  mass_in?: Maybe<Float[] | Float>;
+  mass_not_in?: Maybe<Float[] | Float>;
+  mass_lt?: Maybe<Float>;
+  mass_lte?: Maybe<Float>;
+  mass_gt?: Maybe<Float>;
+  mass_gte?: Maybe<Float>;
   hasStation?: Maybe<Boolean>;
   hasStation_not?: Maybe<Boolean>;
-  AND?: Maybe<SuitablePlanetsWhereInput[] | SuitablePlanetsWhereInput>;
+  AND?: Maybe<SuitablePlanetWhereInput[] | SuitablePlanetWhereInput>;
 }
 
-export interface SuitablePlanetsUpdateInput {
+export interface SuitablePlanetCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  mass: Float;
+  hasStation: Boolean;
+}
+
+export interface SuitablePlanetUpdateInput {
   name?: Maybe<String>;
-  mass?: Maybe<Int>;
+  mass?: Maybe<Float>;
   hasStation?: Maybe<Boolean>;
 }
 
-export interface SuitablePlanetsUpdateManyMutationInput {
+export interface SuitablePlanetUpdateManyMutationInput {
   name?: Maybe<String>;
-  mass?: Maybe<Int>;
+  mass?: Maybe<Float>;
   hasStation?: Maybe<Boolean>;
 }
 
-export interface SuitablePlanetsSubscriptionWhereInput {
+export interface SuitablePlanetSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<SuitablePlanetsWhereInput>;
+  node?: Maybe<SuitablePlanetWhereInput>;
   AND?: Maybe<
-    | SuitablePlanetsSubscriptionWhereInput[]
-    | SuitablePlanetsSubscriptionWhereInput
+    | SuitablePlanetSubscriptionWhereInput[]
+    | SuitablePlanetSubscriptionWhereInput
   >;
 }
-
-export type SuitablePlanetsWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface AggregateSuitablePlanets {
-  count: Int;
-}
-
-export interface AggregateSuitablePlanetsPromise
-  extends Promise<AggregateSuitablePlanets>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateSuitablePlanetsSubscription
-  extends Promise<AsyncIterator<AggregateSuitablePlanets>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface SuitablePlanetsPreviousValues {
+export interface SuitablePlanet {
   id: ID_Output;
   name: String;
-  mass: Int;
+  mass: Float;
   hasStation: Boolean;
 }
 
-export interface SuitablePlanetsPreviousValuesPromise
-  extends Promise<SuitablePlanetsPreviousValues>,
+export interface SuitablePlanetPromise
+  extends Promise<SuitablePlanet>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  mass: () => Promise<Int>;
+  mass: () => Promise<Float>;
   hasStation: () => Promise<Boolean>;
 }
 
-export interface SuitablePlanetsPreviousValuesSubscription
-  extends Promise<AsyncIterator<SuitablePlanetsPreviousValues>>,
+export interface SuitablePlanetSubscription
+  extends Promise<AsyncIterator<SuitablePlanet>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  mass: () => Promise<AsyncIterator<Int>>;
+  mass: () => Promise<AsyncIterator<Float>>;
   hasStation: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface SuitablePlanetsEdge {
-  node: SuitablePlanets;
-  cursor: String;
-}
-
-export interface SuitablePlanetsEdgePromise
-  extends Promise<SuitablePlanetsEdge>,
-    Fragmentable {
-  node: <T = SuitablePlanetsPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SuitablePlanetsEdgeSubscription
-  extends Promise<AsyncIterator<SuitablePlanetsEdge>>,
-    Fragmentable {
-  node: <T = SuitablePlanetsSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SuitablePlanetsSubscriptionPayload {
-  mutation: MutationType;
-  node: SuitablePlanets;
-  updatedFields: String[];
-  previousValues: SuitablePlanetsPreviousValues;
-}
-
-export interface SuitablePlanetsSubscriptionPayloadPromise
-  extends Promise<SuitablePlanetsSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = SuitablePlanetsPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = SuitablePlanetsPreviousValuesPromise>() => T;
-}
-
-export interface SuitablePlanetsSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<SuitablePlanetsSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = SuitablePlanetsSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = SuitablePlanetsPreviousValuesSubscription>() => T;
-}
-
-export interface SuitablePlanets {
-  id: ID_Output;
-  name: String;
-  mass: Int;
-  hasStation: Boolean;
-}
-
-export interface SuitablePlanetsPromise
-  extends Promise<SuitablePlanets>,
+export interface SuitablePlanetNullablePromise
+  extends Promise<SuitablePlanet | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  mass: () => Promise<Int>;
+  mass: () => Promise<Float>;
   hasStation: () => Promise<Boolean>;
 }
 
-export interface SuitablePlanetsSubscription
-  extends Promise<AsyncIterator<SuitablePlanets>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  mass: () => Promise<AsyncIterator<Int>>;
-  hasStation: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface SuitablePlanetsNullablePromise
-  extends Promise<SuitablePlanets | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  mass: () => Promise<Int>;
-  hasStation: () => Promise<Boolean>;
-}
-
-export interface SuitablePlanetsConnection {
+export interface SuitablePlanetConnection {
   pageInfo: PageInfo;
-  edges: SuitablePlanetsEdge[];
+  edges: SuitablePlanetEdge[];
 }
 
-export interface SuitablePlanetsConnectionPromise
-  extends Promise<SuitablePlanetsConnection>,
+export interface SuitablePlanetConnectionPromise
+  extends Promise<SuitablePlanetConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SuitablePlanetsEdge>>() => T;
-  aggregate: <T = AggregateSuitablePlanetsPromise>() => T;
+  edges: <T = FragmentableArray<SuitablePlanetEdge>>() => T;
+  aggregate: <T = AggregateSuitablePlanetPromise>() => T;
 }
 
-export interface SuitablePlanetsConnectionSubscription
-  extends Promise<AsyncIterator<SuitablePlanetsConnection>>,
+export interface SuitablePlanetConnectionSubscription
+  extends Promise<AsyncIterator<SuitablePlanetConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SuitablePlanetsEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSuitablePlanetsSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SuitablePlanetEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSuitablePlanetSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -381,12 +280,106 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface SuitablePlanetEdge {
+  node: SuitablePlanet;
+  cursor: String;
+}
 
-export type Long = string;
+export interface SuitablePlanetEdgePromise
+  extends Promise<SuitablePlanetEdge>,
+    Fragmentable {
+  node: <T = SuitablePlanetPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SuitablePlanetEdgeSubscription
+  extends Promise<AsyncIterator<SuitablePlanetEdge>>,
+    Fragmentable {
+  node: <T = SuitablePlanetSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSuitablePlanet {
+  count: Int;
+}
+
+export interface AggregateSuitablePlanetPromise
+  extends Promise<AggregateSuitablePlanet>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSuitablePlanetSubscription
+  extends Promise<AsyncIterator<AggregateSuitablePlanet>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface SuitablePlanetSubscriptionPayload {
+  mutation: MutationType;
+  node: SuitablePlanet;
+  updatedFields: String[];
+  previousValues: SuitablePlanetPreviousValues;
+}
+
+export interface SuitablePlanetSubscriptionPayloadPromise
+  extends Promise<SuitablePlanetSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SuitablePlanetPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SuitablePlanetPreviousValuesPromise>() => T;
+}
+
+export interface SuitablePlanetSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SuitablePlanetSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SuitablePlanetSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SuitablePlanetPreviousValuesSubscription>() => T;
+}
+
+export interface SuitablePlanetPreviousValues {
+  id: ID_Output;
+  name: String;
+  mass: Float;
+  hasStation: Boolean;
+}
+
+export interface SuitablePlanetPreviousValuesPromise
+  extends Promise<SuitablePlanetPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  mass: () => Promise<Float>;
+  hasStation: () => Promise<Boolean>;
+}
+
+export interface SuitablePlanetPreviousValuesSubscription
+  extends Promise<AsyncIterator<SuitablePlanetPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  mass: () => Promise<AsyncIterator<Float>>;
+  hasStation: () => Promise<AsyncIterator<Boolean>>;
+}
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -395,14 +388,26 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
-export type Int = number;
+export type String = string;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
+export type Long = string;
 
 /**
  * Model Metadata
@@ -410,7 +415,7 @@ export type Boolean = boolean;
 
 export const models: Model[] = [
   {
-    name: "SuitablePlanets",
+    name: "SuitablePlanet",
     embedded: false
   }
 ];

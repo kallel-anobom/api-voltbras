@@ -3,7 +3,7 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateSuitablePlanets {
+/* GraphQL */ `type AggregateSuitablePlanet {
   count: Int!
 }
 
@@ -14,12 +14,12 @@ type BatchPayload {
 scalar Long
 
 type Mutation {
-  createSuitablePlanets(data: SuitablePlanetsCreateInput!): SuitablePlanets!
-  updateSuitablePlanets(data: SuitablePlanetsUpdateInput!, where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
-  updateManySuitablePlanetses(data: SuitablePlanetsUpdateManyMutationInput!, where: SuitablePlanetsWhereInput): BatchPayload!
-  upsertSuitablePlanets(where: SuitablePlanetsWhereUniqueInput!, create: SuitablePlanetsCreateInput!, update: SuitablePlanetsUpdateInput!): SuitablePlanets!
-  deleteSuitablePlanets(where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
-  deleteManySuitablePlanetses(where: SuitablePlanetsWhereInput): BatchPayload!
+  createSuitablePlanet(data: SuitablePlanetCreateInput!): SuitablePlanet!
+  updateSuitablePlanet(data: SuitablePlanetUpdateInput!, where: SuitablePlanetWhereUniqueInput!): SuitablePlanet
+  updateManySuitablePlanets(data: SuitablePlanetUpdateManyMutationInput!, where: SuitablePlanetWhereInput): BatchPayload!
+  upsertSuitablePlanet(where: SuitablePlanetWhereUniqueInput!, create: SuitablePlanetCreateInput!, update: SuitablePlanetUpdateInput!): SuitablePlanet!
+  deleteSuitablePlanet(where: SuitablePlanetWhereUniqueInput!): SuitablePlanet
+  deleteManySuitablePlanets(where: SuitablePlanetWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -40,42 +40,42 @@ type PageInfo {
 }
 
 type Query {
-  suitablePlanets(where: SuitablePlanetsWhereUniqueInput!): SuitablePlanets
-  suitablePlanetses(where: SuitablePlanetsWhereInput, orderBy: SuitablePlanetsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SuitablePlanets]!
-  suitablePlanetsesConnection(where: SuitablePlanetsWhereInput, orderBy: SuitablePlanetsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SuitablePlanetsConnection!
+  suitablePlanet(where: SuitablePlanetWhereUniqueInput!): SuitablePlanet
+  suitablePlanets(where: SuitablePlanetWhereInput, orderBy: SuitablePlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SuitablePlanet]!
+  suitablePlanetsConnection(where: SuitablePlanetWhereInput, orderBy: SuitablePlanetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SuitablePlanetConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
-  suitablePlanets(where: SuitablePlanetsSubscriptionWhereInput): SuitablePlanetsSubscriptionPayload
+  suitablePlanet(where: SuitablePlanetSubscriptionWhereInput): SuitablePlanetSubscriptionPayload
 }
 
-type SuitablePlanets {
+type SuitablePlanet {
   id: ID!
   name: String!
-  mass: Int!
+  mass: Float!
   hasStation: Boolean!
 }
 
-type SuitablePlanetsConnection {
+type SuitablePlanetConnection {
   pageInfo: PageInfo!
-  edges: [SuitablePlanetsEdge]!
-  aggregate: AggregateSuitablePlanets!
+  edges: [SuitablePlanetEdge]!
+  aggregate: AggregateSuitablePlanet!
 }
 
-input SuitablePlanetsCreateInput {
+input SuitablePlanetCreateInput {
   id: ID
   name: String!
-  mass: Int!
+  mass: Float!
   hasStation: Boolean!
 }
 
-type SuitablePlanetsEdge {
-  node: SuitablePlanets!
+type SuitablePlanetEdge {
+  node: SuitablePlanet!
   cursor: String!
 }
 
-enum SuitablePlanetsOrderByInput {
+enum SuitablePlanetOrderByInput {
   id_ASC
   id_DESC
   name_ASC
@@ -86,42 +86,42 @@ enum SuitablePlanetsOrderByInput {
   hasStation_DESC
 }
 
-type SuitablePlanetsPreviousValues {
+type SuitablePlanetPreviousValues {
   id: ID!
   name: String!
-  mass: Int!
+  mass: Float!
   hasStation: Boolean!
 }
 
-type SuitablePlanetsSubscriptionPayload {
+type SuitablePlanetSubscriptionPayload {
   mutation: MutationType!
-  node: SuitablePlanets
+  node: SuitablePlanet
   updatedFields: [String!]
-  previousValues: SuitablePlanetsPreviousValues
+  previousValues: SuitablePlanetPreviousValues
 }
 
-input SuitablePlanetsSubscriptionWhereInput {
+input SuitablePlanetSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: SuitablePlanetsWhereInput
-  AND: [SuitablePlanetsSubscriptionWhereInput!]
+  node: SuitablePlanetWhereInput
+  AND: [SuitablePlanetSubscriptionWhereInput!]
 }
 
-input SuitablePlanetsUpdateInput {
+input SuitablePlanetUpdateInput {
   name: String
-  mass: Int
+  mass: Float
   hasStation: Boolean
 }
 
-input SuitablePlanetsUpdateManyMutationInput {
+input SuitablePlanetUpdateManyMutationInput {
   name: String
-  mass: Int
+  mass: Float
   hasStation: Boolean
 }
 
-input SuitablePlanetsWhereInput {
+input SuitablePlanetWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -150,20 +150,20 @@ input SuitablePlanetsWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  mass: Int
-  mass_not: Int
-  mass_in: [Int!]
-  mass_not_in: [Int!]
-  mass_lt: Int
-  mass_lte: Int
-  mass_gt: Int
-  mass_gte: Int
+  mass: Float
+  mass_not: Float
+  mass_in: [Float!]
+  mass_not_in: [Float!]
+  mass_lt: Float
+  mass_lte: Float
+  mass_gt: Float
+  mass_gte: Float
   hasStation: Boolean
   hasStation_not: Boolean
-  AND: [SuitablePlanetsWhereInput!]
+  AND: [SuitablePlanetWhereInput!]
 }
 
-input SuitablePlanetsWhereUniqueInput {
+input SuitablePlanetWhereUniqueInput {
   id: ID
 }
 `

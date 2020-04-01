@@ -2,24 +2,18 @@ const { prisma } = require('./generated/prisma-client/index');
 
 const resolvers = {
   Query: {
-    suitablePlanets: async (_, args) => prisma.suitablePlanetses({first: args.first, skip: args.skip})
+    // mudando no data model, melhorou o nome da função de pegar os planetas
+    // em nivel de design de API, poderiamos deixar opcional o first,skip
+    // quando usei pela primeira vez, achei um pouco estranho ser obrigatório, poderia ter um default value
+    suitablePlanets: async (_, args) => prisma.suitablePlanets({first: args.first, skip: args.skip})
   },
   Mutation: {
-    installStation: (_, args) => {
-      const { name, mass, hasStation } = args;
-      const { id } = args.where;
-
-      return prisma.updateSuitablePlanets({
-        data: {
-          name,
-          mass,
-          hasStation
-        },
-        where: {
-          id
-        },
+    // só precisamos do ID do planeta pra instalar uma estação nele
+    installStation: (_, { where: { id } }) =>
+      prisma.updateSuitablePlanet({
+        where: { id },
+        data: { hasStation: true }
       })
-    }
   }
 }
 
