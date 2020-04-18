@@ -1,6 +1,11 @@
-type SuitablePlanets {
+"""chamar o type de
+SuitablePlanet, não é a table, estamos falando do Type
+por isso ficava estranho a função getSuitablePlanetses
+renomeando, podemos usar getSuitablePlanets"""
+type SuitablePlanet {
   id: ID! @id 
   name: String!
-  mass: Int!
+  """massa é um float"""
+  mass: Float!
   hasStation: Boolean!
 }
